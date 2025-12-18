@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "RBAC系统登录接口测试",
+    "description": "用于测试RBAC系统的登录接口，包含成功和失败两种场景",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "用户登录（成功示例）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/user/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "user", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"permCode\":\"system:user:own:login\",\"bizParams\":\"{\\\"username\\\":\\\"admin\\\",\\\"password\\\":\\\"123456\\\"}\",\"timestamp\":1735689600000}"
+        }
+      },
+      "response": [
+        {
+          "name": "登录成功响应",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\"success\":true,\"errorCode\":null,\"msg\":\"业务执行成功\",\"data\":\"登录成功\",\"costTime\":20,\"traceId\":\"REQ_1735689600014_5k4j3i2h\",\"timestamp\":\"2025-12-01T10:00:00\",\"ext\":{}}"
+        }
+      ]
+    },
+    {
+      "name": "用户登录（失败示例-用户名密码错误）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/user/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "user", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"permCode\":\"system:user:own:login\",\"bizParams\":\"{\\\"username\\\":\\\"admin\\\",\\\"password\\\":\\\"wrongpassword\\\"}\",\"timestamp\":1735689600000}"
+        }
+      },
+      "response": [
+        {
+          "name": "登录失败响应",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\"success\":false,\"errorCode\":\"LOGIN_FAILED\",\"msg\":\"用户名或密码错误\",\"data\":null,\"costTime\":15,\"traceId\":\"REQ_1735689600015_6l5k4j3i\",\"timestamp\":\"2025-12-01T10:00:00\",\"ext\":{}}"
+        }
+      ]
+    },
+    {
+      "name": "用户登录（失败示例-参数缺失）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/user/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "v1", "user", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"permCode\":\"system:user:own:login\",\"bizParams\":\"{\\\"username\\\":\\\"admin\\\"}\",\"timestamp\":1735689600000}"
+        }
+      },
+      "response": [
+        {
+          "name": "参数缺失响应",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\"success\":false,\"errorCode\":\"LOGIN_PARAM_ERROR\",\"msg\":\"用户名或密码不能为空\",\"data\":null,\"costTime\":10,\"traceId\":\"REQ_1735689600016_7m5l4k3j\",\"timestamp\":\"2025-12-01T10:00:00\",\"ext\":{}}"
+        }
+      ]
+    }
+  ]
+}

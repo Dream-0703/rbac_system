@@ -1,0 +1,12 @@
+# application.yml 中springdoc配置修正
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs  # 新版默认就是这个，可保留
+  swagger-ui:
+    path: /swagger-ui/index.html  # 新版必须带index.html（核心修正）
+    disable-swagger-default-url: true
+    display-request-duration: true
+  packages-to-scan: com.rbac.controller  # 保留，指定扫描Controller包
+
+  #地址:http://localhost:8080/swagger-ui/index.html
